@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Candidate Skill</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav a {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 0 15px;
+        }
+
+        nav li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav li a:hover {
+            color: #007bff;
+        }
+
+        /* Form container */
+        .form-container {
+            background: #fff;
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a.back-link {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        a.back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#">Trang Chủ</a>
+            <ul>
+                <li><a href="/candidates">Ứng viên</a></li>
+                <li><a href="/companies">Công ty</a></li>
+                <li><a href="/jobs">Công việc</a></li>
+                <li><a href="/skills">Kỹ năng</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Form Section -->
+    <div class="form-container">
+        <h2>Add Candidate Skill</h2>
+        <form th:action="@{/candidate-skills}" method="post">
+            <div class="form-group">
+                <label>Candidate:</label>
+                <select name="candidateId">
+                    <option value="">Select Candidate</option>
+                    <option th:each="candidate : ${candidates}"
+                            th:value="${candidate.canId}"
+                            th:text="${candidate.fullName}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Skill:</label>
+                <select name="skillId">
+                    <option value="">Select Skill</option>
+                    <option th:each="skill : ${skills}"
+                            th:value="${skill.skillId}"
+                            th:text="${skill.skillName}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Skill Level:</label>
+                <input type="text" name="skillLevel" placeholder="Enter skill level" />
+            </div>
+            <div class="form-group">
+                <label>More Infos:</label>
+                <input type="text" name="moreInfos" placeholder="Additional information" />
+            </div>
+            <button type="submit">Add Candidate Skill</button>
+        </form>
+        <a href="/candidate-skills" class="back-link">Back to Candidate Skill List</a>
+    </div>
+
+</body>
+</html>

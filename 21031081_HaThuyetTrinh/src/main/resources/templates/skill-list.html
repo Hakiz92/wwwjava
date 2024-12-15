@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Skill List</title>
+</head>
+<body>
+	<header style="background-color: #f8f9fa; padding: 10px 0;">
+		<nav
+			style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+			<a href="#"
+				style="font-size: 24px; font-weight: bold; color: #007bff; text-decoration: none;">Trang
+				Chủ</a>
+			<ul
+				style="display: flex; list-style-type: none; margin: 0; padding: 0;">
+
+				<li style="margin: 0 15px;"><a href="/candidates"
+					style="text-decoration: none; color: #333; font-size: 18px;">Ứng
+						viên</a></li>
+				<li style="margin: 0 15px;"><a href="/companies"
+					style="text-decoration: none; color: #333; font-size: 18px;">Công
+						ty</a></li>
+				<li style="margin: 0 15px;"><a href="/jobs"
+					style="text-decoration: none; color: #333; font-size: 18px;">Công
+						việc</a></li>
+				<li style="margin: 0 15px;"><a href="/skills"
+					style="text-decoration: none; color: #333; font-size: 18px;">Kỹ
+						năng</a></li>
+			</ul>
+		</nav>
+	</header>
+	<h2 style="text-align: center; margin-top: 40px; color: #333;">Skill List</h2>
+	<ul style="list-style-type: none; padding: 0; margin: 20px auto; width: 80%;">
+		<li th:each="skill : ${skills}" 
+			style="background-color: #fff; padding: 10px; margin-bottom: 10px; border-radius: 5px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); font-size: 18px; color: #333;">
+			<span th:text="${skill.skillName}">Skill Name</span>
+		</li>
+	</ul>
+	<a href="skills/add" 
+		style="display: inline-block; margin: 20px 193px; padding: 10px 20px; font-size: 16px; color: #fff; background-color: #007bff; border-radius: 5px; text-decoration: none;">
+		Add Skill</a>
+</body>
+</html>

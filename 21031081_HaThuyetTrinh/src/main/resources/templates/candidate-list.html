@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh Sách Ứng Viên</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        /* Header styling (giữ nguyên như cũ) */
+        header {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav a {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 0 15px;
+        }
+
+        nav li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav li a:hover {
+            color: #007bff;
+        }
+
+        /* Page title */
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        /* Add new button styling */
+        a.add-button {
+            display: inline-block;
+            margin: 20px auto;
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        a.add-button:hover {
+            background-color: #218838;
+        }
+
+        /* Table styling */
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: #fff;
+        }
+
+        table thead {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        table th, table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        table tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Button styling for Edit and Delete */
+        .action-buttons a {
+            text-decoration: none;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .action-buttons a.edit {
+            background-color: #ffc107;
+        }
+
+        .action-buttons a.edit:hover {
+            background-color: #e0a800;
+        }
+
+        .action-buttons a.delete {
+            background-color: #dc3545;
+        }
+
+        .action-buttons a.delete:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#">Trang Chủ</a>
+            <ul>
+                <li><a href="/candidates">Ứng viên</a></li>
+                <li><a href="/companies">Công ty</a></li>
+                <li><a href="/jobs">Công việc</a></li>
+                <li><a href="/skills">Kỹ năng</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Page Title -->
+    <h1>Danh Sách Ứng Viên</h1>
+
+    <!-- Add New Candidate Button -->
+    <div style="text-align: center;">
+        <a href="/candidates/new" class="add-button">Thêm Ứng Viên Mới</a>
+    </div>
+
+    <!-- Candidate Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Ngày Sinh</th>
+                <th>Địa Chỉ</th>
+                <th>Điện Thoại</th>
+                <th>Email</th>
+                <th>Sửa</th>
+                <th>Xóa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="candidate : ${candidates}">
+                <td th:text="${candidate.canId}"></td>
+                <td th:text="${candidate.fullName}"></td>
+                <td th:text="${candidate.dob}"></td>
+                <td th:text="${candidate.address.street + ', ' + candidate.address.city + ', ' + candidate.address.zipcode + ', ' + candidate.address.country}"></td>
+                <td th:text="${candidate.phone}"></td>
+                <td th:text="${candidate.email}"></td>
+                <td class="action-buttons">
+                    <a th:href="@{/candidates/edit/{id}(id=${candidate.canId})}" class="edit">Sửa</a>
+                </td>
+                <td class="action-buttons">
+                    <a th:href="@{/candidates/delete/{id}(id=${candidate.canId})}" class="delete">Xóa</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

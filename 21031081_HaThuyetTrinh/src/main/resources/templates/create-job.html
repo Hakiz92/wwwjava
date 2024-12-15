@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Job</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        nav a {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            font-size: 18px;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 40px;
+            color: #333;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form div {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 18px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <a href="#">Trang Chủ</a>
+            <ul>
+                <li><a href="/candidates">Ứng viên</a></li>
+                <li><a href="/companies">Công ty</a></li>
+                <li><a href="/jobs">Công việc</a></li>
+                <li><a href="/skills">Kỹ năng</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h2>Create Job</h2>
+
+    <form th:action="@{/jobs/save}" method="post">
+        <div>
+            <label for="jobName">Job Name:</label>
+            <input type="text" id="jobName" name="jobName" required />
+        </div>
+        <div>
+            <label for="jobDesc">Job Description:</label>
+            <input type="text" id="jobDesc" name="jobDesc" required />
+        </div>
+        <div>
+            <label for="company">Company:</label>
+            <select id="company" name="company.comId" required>
+                <option value="">Select Company</option>
+                <option th:each="company : ${companies}" th:value="${company.comId}"
+                    th:text="${company.compName}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="skills">Skills:</label>
+            <select id="skills" name="skillIds" multiple required>
+                <option th:each="skill : ${skills}" th:value="${skill.skillId}"
+                    th:text="${skill.skillName}"></option>
+            </select>
+        </div>
+        <button type="submit">Create Job</button>
+    </form>
+
+    <a href="/jobs">Back to Job List</a>
+
+</body>
+</html>

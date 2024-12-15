@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Candidate Skill List</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+
+        header {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav a {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 0 15px;
+        }
+
+        nav li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav li a:hover {
+            color: #007bff;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        a.button {
+            display: inline-block;
+            margin: 20px auto;
+            text-decoration: none;
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        a.button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="/">Trang Chủ</a>
+            <ul>
+                <li><a href="/candidates">Ứng viên</a></li>
+                <li><a href="/companies">Công ty</a></li>
+                <li><a href="/jobs">Công việc</a></li>
+                <li><a href="/skills">Kỹ năng</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Section -->
+    <h2>Candidate Skill List</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Candidate Name</th>
+                <th>Skill Name</th>
+                <th>Skill Level</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="candidateSkill : ${candidateSkills}">
+                <td th:text="${candidateSkill.candidate.fullName}">Candidate Name</td>
+                <td th:text="${candidateSkill.skill.skillName}">Skill Name</td>
+                <td th:text="${candidateSkill.skillLevel}">Skill Level</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/candidate-skills/add" class="button">Add Candidate Skill</a>
+</body>
+</html>

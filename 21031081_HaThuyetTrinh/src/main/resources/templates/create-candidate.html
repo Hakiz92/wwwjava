@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thêm Ứng Viên Mới</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        header {
+            background-color: #f8f9fa;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav a {
+            font-size: 24px;
+            font-weight: bold;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav li {
+            margin: 0 15px;
+        }
+
+        nav li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav li a:hover {
+            color: #007bff;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Form Styling */
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            form {
+                width: 90%;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="/">Trang Chủ</a>
+            <ul>
+                <li><a href="/candidates">Ứng viên</a></li>
+                <li><a href="/companies">Công ty</a></li>
+                <li><a href="/jobs">Công việc</a></li>
+                <li><a href="/skills">Kỹ năng</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <h1>Thêm Ứng Viên Mới</h1>
+    <form th:action="@{/candidates/save}" th:object="${candidate}" method="post">
+        <!-- Họ và tên -->
+        <label for="fullName">Họ và tên:</label>
+        <input type="text" id="fullName" th:field="*{fullName}" placeholder="Nhập họ và tên" required>
+
+        <!-- Ngày sinh -->
+        <label for="dob">Ngày sinh:</label>
+        <input type="date" id="dob" th:field="*{dob}" required>
+
+        <!-- Địa chỉ -->
+        <label>Địa chỉ:</label>
+        <input type="text" id="street" th:field="*{address.street}" placeholder="Tên đường" required>
+        <input type="text" id="city" th:field="*{address.city}" placeholder="Thành phố" required>
+        <input type="text" id="zipcode" th:field="*{address.zipcode}" placeholder="Mã bưu điện" required>
+        <input type="text" id="country" th:field="*{address.country}" placeholder="Mã quốc gia" required>
+
+        <!-- Số điện thoại -->
+        <label for="phone">Số điện thoại:</label>
+        <input type="text" id="phone" th:field="*{phone}" placeholder="Nhập số điện thoại" required>
+
+        <!-- Email -->
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" placeholder="Nhập email" required>
+
+        <!-- Submit Button -->
+        <button type="submit">Lưu</button>
+    </form>
+</body>
+</html>
